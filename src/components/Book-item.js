@@ -1,6 +1,6 @@
 const BookItem = ({book}) => {
   return ( 
-      <div key={book.id} className="book">
+      <div className="book">
         <p>{book.title}</p>
         <p>{book.author}</p>
         {book.rating && <p>{book.rating}</p>}
