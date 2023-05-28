@@ -1,4 +1,4 @@
-export const sortBy = function (obj, sortProp) {
+export const sortByObjProp = function (obj, sortProp) {
 
   for (const property in obj) {
     if (obj[property].length > 1) {

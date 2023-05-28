@@ -1,0 +1,31 @@
+@import '../base/index.scss';
+
+.book-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.group-heading {
+  margin: 1.1rem 0 0.5rem 0;
+  padding: 0.3rem 0.4rem;
+  background-color: $secondary-color;
+  color: white;
+  border-radius: 5px;
+}
+
+
+@media (min-width: 800px) {
+  .book-group {
+    flex-direction: row;
+  }
+
+  .group-heading {
+    box-shadow: 0 4px 2px -2px $secondary-color;
+    border-radius: 0;
+    background-color: white;
+    color: inherit;
+  }
+
+}

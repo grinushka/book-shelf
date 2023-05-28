@@ -1,0 +1,10 @@
+@use '../base/index' as *;
+
+.recommendation {
+  margin-bottom: 1.6rem;
+}
+
+.recommendation h2 {
+  color: $golden;
+  margin-bottom: 1rem;
+}

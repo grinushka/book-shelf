@@ -1,0 +1,37 @@
+@use '../base/index' as *;
+
+.book {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+
+  padding: 1.3em 0.9em;
+  box-shadow: 4px 4px 10px 0px $shadow-color;
+  border-radius: $small-b-radius;
+  &:hover {
+    box-shadow: 5px 5px 12px 0px $shadow-color;
+  }
+}
+
+.title {
+  margin-bottom: 0.4rem;
+}
+
+.author {
+  color: $grey-text;
+}
+
+.delete {
+  width: 1.2rem;
+  height: 1.2rem;
+
+  img {
+    filter: invert(30%) sepia(5%) saturate(3%) hue-rotate(331deg) brightness(91%) contrast(83%);
+  }
+}
+
+@media (min-width: 800px) {
+  .book {
+    width: 20rem;
+  }
+}

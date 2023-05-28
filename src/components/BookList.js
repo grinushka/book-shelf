@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { getData } from '../services/getData';
 import { groupBy } from '../utils/groupBy';
-import { sortBy } from '../utils/sortObjByProperty';
+import { sortByObjProp } from '../utils/sortObjByProperty';
 import { recommendBook } from '../utils/recommendBook';
 import { v4 as uuid } from 'uuid';
 
-import BookGroup from './Book-group';
-import BookItem from './Book-item';
+import BookGroup from './BookGroup';
+import BookItem from './BookItem';
+
+import '../style/components/bookList.scss';
+
+import Recommendation from './Recommendation';
 
 const BookList = () => {
   const [loading, setLoading] = useState(false);
@@ -17,16 +21,19 @@ const BookList = () => {
     setLoading(true);
     const response = await getData();
 
-    // Get a reccomendation
+    // Get a recommendation
     const recommendation = recommendBook([...response]);
     setRecomendation(recommendation);
 
     // Group books by some criteria, def: publicationYear
     const groupedBooks = groupBy([...response], 'publicationYear');
-    sortBy(groupedBooks, 'title');
+    sortByObjProp(groupedBooks, 'title');
 
     // Create an array from the object, then reverse it to get the descending order
     const groupedBooksArr = Object.entries(groupedBooks).reverse();
+
+    // Move books with year unspecified (aka 'undefined') to the end
+    groupedBooksArr.push(groupedBooksArr.shift());
 
     setBookData(groupedBooksArr);
     setLoading(false);
@@ -37,16 +44,34 @@ const BookList = () => {
   }, []);
 
   return (
-    <section>
-      <h1>Books</h1>
+    <section className='all-books'>
       {loading && <p>Loading...</p>}
-      <div className='book-list'>
-        <BookItem book={recommendation} className='recommedation'/>
-        {bookData.length > 0 &&
-          bookData.map((item) => {
-            return <BookGroup key={uuid()} year={item[0]} books={item[1]}/>;
+
+      {bookData.length > 0 && (
+        <div className='book-list'>
+
+          <Recommendation book={recommendation}/>
+
+          {/* {<div className='recommendation'>
+            <h3>Today's recommendation</h3>
+            <BookItem
+            book={recommendation}
+            className='recommended-book'
+          />
+          </div>}
+           */}
+
+          {bookData.map((item) => {
+            return (
+              <BookGroup
+                key={uuid()}
+                year={item[0]}
+                books={item[1]}
+              />
+            );
           })}
-      </div>
+        </div>
+      )}
     </section>
   );
 };
