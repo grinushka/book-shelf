@@ -1,10 +1,12 @@
 import '../style/components/bookItem.scss';
 import deleteBtn from '../img/delete.svg';
 
-const BookItem = ({ book }) => {
+const BookItem = ({ book, handleDelete }) => {
 
   return (
-    <div className='book'>
+    <div
+      className='book'
+      id={book.id}>
       <div className='content'>
         <h4 className='title'>{book.title}</h4>
         <h5 className='author'>
@@ -18,9 +20,14 @@ const BookItem = ({ book }) => {
         ) : (
           <p className='rating'>0</p>
         )}
+
+        {book.isbn && <p className='isbn'>ISBN: {book.isbn}</p>}
       </div>
 
-      <div className='buttons'>
+      <div className='buttons' onClick={() => {
+        console.log(book.id);
+        handleDelete(book.id)
+        }}>
         <div className='delete'>
           <img
             src={deleteBtn}
@@ -28,7 +35,6 @@ const BookItem = ({ book }) => {
           />
         </div>
       </div>
-
     </div>
   );
 };

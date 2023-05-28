@@ -6,42 +6,50 @@ import { recommendBook } from '../utils/recommendBook';
 import { v4 as uuid } from 'uuid';
 
 import BookGroup from './BookGroup';
-import BookItem from './BookItem';
 
 import '../style/components/bookList.scss';
 
 import Recommendation from './Recommendation';
+import { deleteItem } from '../services/deleteItem';
 
 const BookList = () => {
   const [loading, setLoading] = useState(false);
   const [bookData, setBookData] = useState([]);
-  const [recommendation, setRecomendation] = useState([]);
 
   const fetchData = async () => {
     setLoading(true);
     const response = await getData();
-
-    // Get a recommendation
-    const recommendation = recommendBook([...response]);
-    setRecomendation(recommendation);
-
-    // Group books by some criteria, def: publicationYear
-    const groupedBooks = groupBy([...response], 'publicationYear');
-    sortByObjProp(groupedBooks, 'title');
-
-    // Create an array from the object, then reverse it to get the descending order
-    const groupedBooksArr = Object.entries(groupedBooks).reverse();
-
-    // Move books with year unspecified (aka 'undefined') to the end
-    groupedBooksArr.push(groupedBooksArr.shift());
-
-    setBookData(groupedBooksArr);
+    setBookData([...response]);
     setLoading(false);
   };
 
+  const groupAndSort = (data) => {
+    // Group books by some criteria, def: publicationYear
+    const groupedBooks = groupBy(data, 'publicationYear');
+
+    sortByObjProp(groupedBooks, 'title');
+
+    // Create an array from the object, then reverse it to get the descending order
+    const booksArr = Object.entries(groupedBooks).reverse();
+
+    // Move books with year unspecified (aka 'undefined') to the end
+    if (booksArr[0][0] === 'undefined') {
+    booksArr.push(booksArr.shift());
+    };
+
+    return booksArr
+  };
+
+  const handleDelete = (id) => {
+    console.log('clicked in the LIST!');
+    const newBooks = bookData.filter(book => book.id !== id);
+    setBookData(newBooks);
+    deleteItem(id);
+  }
+
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   return (
     <section className='all-books'>
@@ -50,23 +58,15 @@ const BookList = () => {
       {bookData.length > 0 && (
         <div className='book-list'>
 
-          <Recommendation book={recommendation}/>
+          {recommendBook(bookData) && <Recommendation book={recommendBook(bookData)}/>}
 
-          {/* {<div className='recommendation'>
-            <h3>Today's recommendation</h3>
-            <BookItem
-            book={recommendation}
-            className='recommended-book'
-          />
-          </div>}
-           */}
-
-          {bookData.map((item) => {
+          {groupAndSort(bookData).map((item) => {
             return (
               <BookGroup
                 key={uuid()}
                 year={item[0]}
                 books={item[1]}
+                handleDelete={handleDelete}
               />
             );
           })}

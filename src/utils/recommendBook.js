@@ -29,8 +29,8 @@ export const recommendBook = function (allBooks) {
 
 
   // Finds the highest possible rating
-  let highestRating = checkedBooks[0].rating;
-  for (let i = 1; i < checkedLength; i++) {
+  let highestRating = 0;
+  for (let i = 0; i < checkedLength; i++) {
     if (checkedBooks[i].rating > highestRating) {
       highestRating = checkedBooks[i].rating;
     }
