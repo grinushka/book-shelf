@@ -1,14 +1,12 @@
 import Header from './components/Header';
-import BookList from './components/BookList';
-
-import './style/utilities/_container.scss';
+import Home from './components/Home';
 
 function App() {
   return (
     <div className='App'>
       <div className='container'>
         <Header />
-        <BookList />
+        <Home/>
       </div>
     </div>
   );

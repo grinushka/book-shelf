@@ -1,4 +1,3 @@
-import '../style/components/bookItem.scss';
 import deleteBtn from '../img/delete.svg';
 
 const BookItem = ({ book, handleDelete }) => {

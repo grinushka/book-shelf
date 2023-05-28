@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
+
 import { getData } from '../services/getData';
 import { groupBy } from '../utils/groupBy';
 import { sortByObjProp } from '../utils/sortObjByProperty';
 import { recommendBook } from '../utils/recommendBook';
+import { deleteItem } from '../services/deleteDocument';
 import { v4 as uuid } from 'uuid';
 
 import BookGroup from './BookGroup';
-
-import '../style/components/bookList.scss';
-
 import Recommendation from './Recommendation';
-import { deleteItem } from '../services/deleteItem';
 
 const BookList = () => {
   const [loading, setLoading] = useState(false);

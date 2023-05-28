@@ -1,0 +1,14 @@
+@use './components/index' as components;
+@use './base/index' as base;
+@use './utils/index' as utils;
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+  // Responsive font-size
+  font-size: calc(14px + (15 - 12) * ((100vw - 300px) / (1600 - 300)));
+}

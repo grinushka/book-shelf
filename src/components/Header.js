@@ -1,5 +1,3 @@
-import '../style/components/header.scss';
-
 const Header = () => {
   return ( 
     <div className="header">

@@ -1,7 +1,5 @@
 import BookItem from './BookItem';
 
-import '../style/components/bookGroup.scss';
-
 const BookGroup = ({ year, books, handleDelete }) => {
   return (
     <div>

@@ -1,7 +1,5 @@
 import BookItem from './BookItem';
 
-import '../style/components/recommendation.scss';
-
 const Recommendation = (props) => {
   return (
     <div className='recommendation'>
