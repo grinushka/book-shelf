@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getDb } from '../services/db';
 import { collection, addDoc } from 'firebase/firestore';
-import { navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddBook = () => {
   const [title, setTitle] = useState('');
