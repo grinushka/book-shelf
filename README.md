@@ -13,10 +13,10 @@
 
 ### Превью
 
-Десктопный дизайн
+#### Десктопный дизайн
 ![Desktop preview](./desktop-preview.png)
 
-Мобильный дизайн
+#### Мобильный дизайн
 ![MObile preview](./mobile-preview.png)
 
 ### Разработан с помощью
