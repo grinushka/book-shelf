@@ -24,7 +24,6 @@ const BookItem = ({ book, handleDelete }) => {
       </div>
 
       <div className='buttons' onClick={() => {
-        console.log(book.id);
         handleDelete(book.id)
         }}>
         <div className='delete'>

@@ -38,10 +38,14 @@ const BookList = () => {
     return booksArr
   };
 
+  // Function to delete the book
   const handleDelete = (id) => {
-    console.log('clicked in the LIST!');
+
+    // Delete the book from current state
     const newBooks = bookData.filter(book => book.id !== id);
     setBookData(newBooks);
+
+    // Delete the book from Firebase
     deleteItem(id);
   }
 
@@ -56,6 +60,7 @@ const BookList = () => {
       {bookData.length > 0 && (
         <div className='book-list'>
 
+          {/* If the recommendBook function returns something truthy, then we display the recommendation */}
           {recommendBook(bookData) && <Recommendation book={recommendBook(bookData)}/>}
 
           {groupAndSort(bookData).map((item) => {

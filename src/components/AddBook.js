@@ -3,7 +3,7 @@ import { getDb } from '../services/db';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-import { validate, generate } from 'isbn-util';
+import { validate} from 'isbn-util';
 
 const AddBook = () => {
   const [title, setTitle] = useState('');
@@ -12,7 +12,7 @@ const AddBook = () => {
   const [rating, setRating] = useState('0');
   const [isbn, setISBN] = useState('');
 
-  // States for displaing errors while user is typing
+  // States for displaing errors while the user is typing
   const [titleError, setTitleError] = useState('Обязательное поле');
   const [authorError, setAuthorError] = useState('Обязательное поле');
   const [yearError, setYearError] = useState('');

@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Serioguesser 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Go ahead and play the game if you love TV shows (well, who doesn't anyway?), that will show you how well you know the industry.
+I tried to do a mix up of the most well-know TV shows for the last 20 years or so, but there still might be some you do not not, because of the prejudices view and a want to put my favourites in here.
 
-## Available Scripts
+[Play serioguesser 🎲](https://master--benevolent-sunburst-dbd4f5.netlify.app/)
 
-In the project directory, you can run:
+The same game logic may be applied to any other things with the distinctive melody and sound (music, cartoons, famous people voices etc.)
 
-### `npm start`
+Hope you enjoy it!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Note: 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Challenges faced and things learned during development
 
-### `npm test`
+- Keep both desktop, tablet and mobile version together, changing the layout with media queries and modern CSS features
+- Trying to keep JS consice
+- Get to know webpack docs and config file a bit better
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Screenshots
 
-### `npm run build`
+![Desktop preview](./screenshots/desktop-first-level.png)
+![Desktop preview / TV show info](./screenshots/desktop-right-choice.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Built with
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Mighty Javascript
+- SCSS that beautifies
+- Powerful Webpack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Acknowledgments
 
-### `npm run eject`
+- [Lots of thanks to Harvard University for making education accessible, quite succinct and to the point](https://cs50.harvard.edu/x/2023/)
+- Redesigned game idea from [The Rolling Scopes School](https://rs.school/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Badges
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[![GitHub](https://img.shields.io/github/followers/grinushka?style=social)](https://github.com/grinushka)
+[![Twitter](https://img.shields.io/twitter/follow/grinushka)](https://twitter.com/grinushka)
+&nbsp;
+[![Codewars](https://img.shields.io/badge/Codewars-grinushka-red)](https://www.codewars.com/users/grinushka)
+&nbsp;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Notes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Todos:
+- add filters
+- 
