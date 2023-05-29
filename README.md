@@ -21,7 +21,6 @@
 ### Разработан с помощью
 - HTML, SCSS, JS
 - React
-- React DOM
 - Firebase
 - Lodash
 
