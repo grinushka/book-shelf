@@ -8,7 +8,6 @@
 - интеграция с Firebase
 - добавление и удаление книг
 - минималистичная мобильная и десктопная верстка
-- валидация ISBN на этапе заполнения формы
 
 
 ### Превью
@@ -17,7 +16,7 @@
 ![Desktop preview](./desktop-preview.png)
 
 #### Мобильный дизайн
-![MObile preview](./mobile-preview.png)
+![Mobile preview](./mobile-preview.png)
 
 ### Разработан с помощью
 - HTML, SCSS, JS
