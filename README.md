@@ -11,9 +11,12 @@
 - валидация ISBN на этапе заполнения формы
 
 
-### Screenshots
+### Превью
 
+Десктопный дизайн
 ![Desktop preview](./desktop-preview.png)
+
+Мобильный дизайн
 ![MObile preview](./mobile-preview.png)
 
 ### Разработан с помощью
