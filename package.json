@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@types/core-js": "^2.5.5"
+    "@types/core-js": "^2.5.5",
+    "isbn-util": "^2.0.1"
   }
 }

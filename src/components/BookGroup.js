@@ -3,7 +3,7 @@ import BookItem from './BookItem';
 const BookGroup = ({ year, books, handleDelete }) => {
   return (
     <div>
-      {year === 'undefined' ? <h3 className='group-heading'>Others</h3> : <h3 className='group-heading'>{year}</h3>}
+      {year === 'undefined' ? <h3 className='group-heading'>Другие</h3> : <h3 className='group-heading'>{year}</h3>}
 
       <div className='book-group'>
         {books.length > 0 &&

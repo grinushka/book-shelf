@@ -3,6 +3,8 @@ import { getDb } from '../services/db';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
+import { validate, generate } from 'isbn-util';
+
 const AddBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -22,7 +24,7 @@ const AddBook = () => {
   // Using naviagte to go back to all books after submit
   const navigate = useNavigate();
 
-  // Validate the title during typing
+  // Validate the title while typing
   const handleTitleValidation = (value) => {
     if (value === '') {
       setTitleError('Обязательное поле');
@@ -33,7 +35,7 @@ const AddBook = () => {
     }
   };
 
-  // Validate the author suring typing
+  // Validate the author while typing
   const handleAuthorValidation = (value) => {
     if (value === '') {
       setAuthorError('Обязательное поле');
@@ -44,6 +46,7 @@ const AddBook = () => {
     }
   };
 
+  // Validate the year
   const handleYearValidation = (value) => {
     if (value === '') {
       setYearError('');
@@ -54,6 +57,7 @@ const AddBook = () => {
     }
   };
 
+  // Validate the length and actual ISBN number
   const validateISBN = (value) => {
     const maxChars = 13;
 
@@ -63,18 +67,22 @@ const AddBook = () => {
       setIsbnError('ISBN должен состоять из 13 цифр');
     } else {
       if (value.length >= maxChars) {
-        setISBN(value.substr(0, maxChars))
+        setISBN(value.substr(0, maxChars));
+
+        // Validate ISBN
+        validate(isbn) === true ? setIsbnError('Valid') : setIsbnError('Invalid');
       }
-      setIsbnError('');
     }
   };
 
+  // Check if required field are truthy (have something apart from spaces)
   const checkRequiredFiels = () => {
     if (title.trim() && author.trim()) {
       return true;
     }
   };
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -83,6 +91,8 @@ const AddBook = () => {
       } else {
         setLoading(true);
 
+        // Create book object depending on the state of the inputs
+        // As publicationYear and ISBN are not required, we do not want to put empty values in the object
         const book = {
           title,
           author,
@@ -95,17 +105,16 @@ const AddBook = () => {
           }),
         };
 
+        // Sanitize the book obj by trimming its values
         const sanitizedBook = (obj) => {
           Object.keys(obj).forEach(function (key) {
             obj[key] = book[key].trim();
           });
           return obj;
         };
-        console.log(sanitizedBook(book));
 
-        const db = getDb();
-        const docRef = await addDoc(collection(db, 'book-buddy'), book);
-        console.log(docRef);
+        // Push the book object to Firestore
+        await addDoc(collection(getDb(), 'book-buddy'), sanitizedBook);;
         setLoading(false);
         navigate('/');
       }

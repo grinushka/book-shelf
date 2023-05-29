@@ -7,13 +7,13 @@ const BookItem = ({ book, handleDelete }) => {
       className='book'
       id={book.id}>
       <div className='content'>
-        <h4 className='title'>{book.title}</h4>
-        <h5 className='author'>
+        <h3 className='title'>{book.title}</h3>
+        <h4 className='author'>
           {book.author},{' '}
           {book.publicationYear && (
             <span className='year'>{book.publicationYear}</span>
           )}
-        </h5>
+        </h4>
         {book.rating ? (
           <p className='rating'>Оценка: {book.rating}</p>
         ) : (

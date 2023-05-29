@@ -30,8 +30,6 @@ const BookList = () => {
     // Create an array from the object, then reverse it to get the descending order
     const booksArr = Object.entries(groupedBooks).reverse();
 
-    console.log(booksArr)
-
     // Move books with year unspecified (aka 'undefined') to the end
     if (booksArr[0][0] === 'undefined') {
     booksArr.push(booksArr.shift());
@@ -53,7 +51,7 @@ const BookList = () => {
 
   return (
     <section className='all-books'>
-      {loading && <p>Loading...</p>}
+      {loading && <p>Загрузка...</p>}
 
       {bookData.length > 0 && (
         <div className='book-list'>
