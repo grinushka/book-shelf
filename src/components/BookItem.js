@@ -17,7 +17,7 @@ const BookItem = ({ book, handleDelete }) => {
         {book.rating ? (
           <p className='rating'>Оценка: {book.rating}</p>
         ) : (
-          <p className='rating'>0</p>
+          <p className='rating'>Оценка: 0</p>
         )}
 
         {book.isbn && <p className='isbn'>ISBN: {book.isbn}</p>}

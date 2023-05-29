@@ -6,17 +6,19 @@
   text-align: center;
 
   h3 {
-    margin: 2rem 0 1.2rem 0;
+    font-size: 1.2rem;
+    margin: 2rem 0 1.4rem 0;
     text-align: left;
   }
 }
 
 .create label {
+  font-size: 0.85rem;
   text-align: left;
   display: block;
 }
 
-.create input {
+.create input, textarea {
   width: 100%;
   padding: 0.6em 0.7em;
   margin: 0.4rem 0 0.8rem 0;
@@ -41,11 +43,27 @@
   transition: opacity 0.1s;
   cursor: pointer;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:enabled:hover {
     opacity: 0.8;
   }
 }
 
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.error {
+  font-size: 0.7rem;
+  display: block;
+  max-width: 60%;
+  color: #f09000;
+}
 
 @media (min-width: 800px) {
   .create h3 {

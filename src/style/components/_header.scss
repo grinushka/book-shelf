@@ -7,8 +7,8 @@
   gap: 1.5rem;
   margin-bottom: 1rem;
 
-  h1 {
-    font-size: 2.2rem;
+  h2 {
+    font-size: 2rem;
     color: $main-color;
     box-shadow: 0 4px 2px -2px $secondary-color;
   }
@@ -49,7 +49,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    h1 {
+    h2 {
       box-shadow: none;
     }
 

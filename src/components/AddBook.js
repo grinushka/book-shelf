@@ -10,19 +10,105 @@ const AddBook = () => {
   const [rating, setRating] = useState('0');
   const [isbn, setISBN] = useState('');
 
+  // States for displaing errors while user is typing
+  const [titleError, setTitleError] = useState('Обязательное поле');
+  const [authorError, setAuthorError] = useState('Обязательное поле');
+  const [yearError, setYearError] = useState('');
+  const [isbnError, setIsbnError] = useState('');
+
+  // Loading to change change the button after submit
   const [loading, setLoading] = useState(false);
+
+  // Using naviagte to go back to all books after submit
   const navigate = useNavigate();
+
+  // Validate the title during typing
+  const handleTitleValidation = (value) => {
+    if (value === '') {
+      setTitleError('Обязательное поле');
+    } else if (value.replace(/\s+/g, '').length === 0) {
+      setTitleError('Некорректное название');
+    } else {
+      setTitleError('');
+    }
+  };
+
+  // Validate the author suring typing
+  const handleAuthorValidation = (value) => {
+    if (value === '') {
+      setAuthorError('Обязательное поле');
+    } else if (value.replace(/\s+/g, '').length === 0) {
+      setAuthorError('Некорректный автор');
+    } else {
+      setAuthorError('');
+    }
+  };
+
+  const handleYearValidation = (value) => {
+    if (value === '') {
+      setYearError('');
+    } else if (value < 1800) {
+      setYearError('Должен быть больше 1800 г.');
+    } else {
+      setYearError('');
+    }
+  };
+
+  const validateISBN = (value) => {
+    const maxChars = 13;
+
+    if (value === '') {
+      setIsbnError('');
+    } else if (value.length < 13) {
+      setIsbnError('ISBN должен состоять из 13 цифр');
+    } else {
+      if (value.length >= maxChars) {
+        setISBN(value.substr(0, maxChars))
+      }
+      setIsbnError('');
+    }
+  };
+
+  const checkRequiredFiels = () => {
+    if (title.trim() && author.trim()) {
+      return true;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      const book = { title, author, publicationYear, rating, isbn };
-      const db = getDb();
-      const docRef = await addDoc(collection(db, 'book-buddy'), book);
-      console.log(docRef);
-      setLoading(false);
-      navigate('/')
+      if (!checkRequiredFiels()) {
+        throw new Error('Не заполнены обязательные поля');
+      } else {
+        setLoading(true);
+
+        const book = {
+          title,
+          author,
+          rating,
+          ...(publicationYear && {
+            publicationYear,
+          }),
+          ...(isbn && {
+            isbn,
+          }),
+        };
+
+        const sanitizedBook = (obj) => {
+          Object.keys(obj).forEach(function (key) {
+            obj[key] = book[key].trim();
+          });
+          return obj;
+        };
+        console.log(sanitizedBook(book));
+
+        const db = getDb();
+        const docRef = await addDoc(collection(db, 'book-buddy'), book);
+        console.log(docRef);
+        setLoading(false);
+        navigate('/');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -32,30 +118,53 @@ const AddBook = () => {
     <div className='create'>
       <h3>Добавить новую книгу</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='title'>Название:</label>
+        <div className='wrapper'>
+          <label htmlFor='title'>Название:</label>
+          <span className='error'>{titleError}</span>
+        </div>
+
         <input
           type='text'
           required
           id='title'
+          maxLength='100'
+          placeholder='Название'
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            handleTitleValidation(e.target.value);
+          }}
         />
 
-        <label htmlFor='author'>Автор:</label>
+        <div className='wrapper'>
+          <label htmlFor='author'>Автор:</label>
+          <span className='error'>{authorError}</span>
+        </div>
         <input
           type='text'
           required
           id='author'
+          placeholder='Автор'
           value={author}
-          onChange={(e) => setAuthor(e.target.value)}></input>
+          onChange={(e) => {
+            setAuthor(e.target.value);
+            handleAuthorValidation(e.target.value);
+          }}></input>
 
-        <label htmlFor='year'>Год публикации</label>
+        <div className='wrapper'>
+          <label htmlFor='year'>Год публикации</label>
+          <span className='error'>{yearError}</span>
+        </div>
         <input
           type='number'
           min='1800'
           id='year'
+          placeholder='Не ранее 1800 г.'
           value={publicationYear}
-          onChange={(e) => setYear(e.target.value)}></input>
+          onChange={(e) => {
+            setYear(e.target.value);
+            handleYearValidation(e.target.value);
+          }}></input>
 
         <label htmlFor='rating'>Рейтинг</label>
         <input
@@ -66,12 +175,21 @@ const AddBook = () => {
           value={rating}
           onChange={(e) => setRating(e.target.value)}></input>
 
-        <label htmlFor='isbn'>ISBN</label>
+        <div className='wrapper'>
+          <label htmlFor='isbn'>ISBN</label>
+          <span className='error'>{isbnError}</span>
+        </div>
         <input
-          type='text'
+          type='number'
+          // pattern="[0-9]+"
           id='isbn'
+          maxLength='13'
+          placeholder='ISBN-13'
           value={isbn}
-          onChange={(e) => setISBN(e.target.value)}></input>
+          onChange={(e) => {
+            setISBN(e.target.value);
+            validateISBN(e.target.value);
+          }}></input>
 
         {!loading && <button>Положить на полку</button>}
         {loading && <button disabled>Кладем...</button>}
