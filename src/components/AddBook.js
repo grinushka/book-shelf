@@ -187,7 +187,7 @@ const AddBook = () => {
           type='text'
           id='isbn'
           // pattern='/^\d{3}-\d{1}-\d{2}-\d{6}-\d{1}$|^\d{13}$/'
-          placeholder='ISBN-13'
+          placeholder='978-3-16-148410-0-13'
           value={isbn}
           onChange={(e) => {
             setISBN(e.target.value);
