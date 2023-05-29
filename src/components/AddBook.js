@@ -3,8 +3,6 @@ import { getDb } from '../services/db';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-import { validate} from 'isbn-util';
-
 const AddBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -19,7 +17,7 @@ const AddBook = () => {
   const [isbnError, setIsbnError] = useState('');
 
   // Loading to change change the button after submit
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState();
 
   // Using naviagte to go back to all books after submit
   const navigate = useNavigate();
@@ -59,7 +57,7 @@ const AddBook = () => {
 
   // Validate the length and actual ISBN number
   const validateISBN = (value) => {
-    const maxChars = 13;
+    const maxChars = 17;
 
     if (value === '') {
       setIsbnError('');
@@ -68,9 +66,7 @@ const AddBook = () => {
     } else {
       if (value.length >= maxChars) {
         setISBN(value.substr(0, maxChars));
-
-        // Validate ISBN
-        validate(isbn) === true ? setIsbnError('Valid') : setIsbnError('Invalid');
+        setIsbnError('')
       }
     }
   };
@@ -106,15 +102,14 @@ const AddBook = () => {
         };
 
         // Sanitize the book obj by trimming its values
-        const sanitizedBook = (obj) => {
-          Object.keys(obj).forEach(function (key) {
-            obj[key] = book[key].trim();
-          });
-          return obj;
-        };
+        Object.keys(book).forEach(function (key) {
+          book[key] = book[key].trim();
+        });
+        
+        console.log(book);
 
-        // Push the book object to Firestore
-        await addDoc(collection(getDb(), 'book-buddy'), sanitizedBook);;
+        // Push the book document to Firestore
+        await addDoc(collection(getDb(), 'book-buddy'), book);
         setLoading(false);
         navigate('/');
       }
@@ -189,19 +184,19 @@ const AddBook = () => {
           <span className='error'>{isbnError}</span>
         </div>
         <input
-          type='number'
-          // pattern="[0-9]+"
+          type='text'
           id='isbn'
-          maxLength='13'
+          // pattern='/^\d{3}-\d{1}-\d{2}-\d{6}-\d{1}$|^\d{13}$/'
           placeholder='ISBN-13'
           value={isbn}
           onChange={(e) => {
             setISBN(e.target.value);
             validateISBN(e.target.value);
           }}></input>
+          
 
-        {!loading && <button>Положить на полку</button>}
-        {loading && <button disabled>Кладем...</button>}
+        {!loading && <button>Добавить в каталог</button>}
+        {loading && <button disabled>Добавляем...</button>}
       </form>
     </div>
   );
