@@ -24,7 +24,6 @@
 - React DOM
 - Firebase
 - Lodash
-- ISBN Validator
 
 
 [![GitHub](https://img.shields.io/github/followers/grinushka?style=social)](https://github.com/grinushka)
